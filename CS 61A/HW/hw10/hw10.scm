@@ -1,0 +1,31 @@
+(define (accumulate combiner start n term)
+    (define (helper combiner start n term counter)
+        (if (= counter n) start
+            (helper combiner (combiner start (term (+ 1 counter))) n term (+ 1 counter)
+                )
+            )
+        )
+  (helper combiner start n term 0)
+)
+
+(define (accumulate-tail combiner start n term)
+   (define (helper combiner start n term counter)
+        (if (= counter n) start
+            (helper combiner (combiner start (term (+ 1 counter))) n term (+ 1 counter)
+                )
+            )
+        )
+  (helper combiner start n term 0)
+)
+
+(define (rle s)
+  (define (helper s n)
+      (cond ((null? s) '())
+            ((null? (cdr-stream s)) (cons-stream (cons (car s) (cons n nil)) nil))
+            ((= (car s) (car (cdr-stream s))) (helper (cdr-stream s) (+ 1 n)))
+            (else (cons-stream (cons (car s) (cons n nil)) (helper (cdr-stream s) 1)))
+          )
+      )
+  (helper s 1)
+)
+
