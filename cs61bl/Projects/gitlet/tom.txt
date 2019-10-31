@@ -1,0 +1,3 @@
+<<<<<<< HEAD
+Origin to other=======
+Origin to master>>>>>>>
